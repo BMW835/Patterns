@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Hw3.MailBuilder;
 
 namespace Hw3
@@ -14,11 +15,24 @@ namespace Hw3
 
         private static void RunMailBuilder()
         {
-            var mailer = new MailBuilder();
+            var mailer = new MailBuilder.MailBuilder();
             var director = new MailBuilderDirector(mailer);
-            director.Build("name", "text");
+            List<string> receivers = new List<string> { "name1", "name2"};
+            List<string> copies = new List<string> { "copy1"}; 
+            director.Build(receivers, copies, "title", "text");
             var mail = mailer.Result;
-            Console.WriteLine($"{mail.Receiver} : {mail.Copy} : {mail.Title}: {mail.Text}");
+            mail.Receiver.ForEach(delegate(String name) {
+                name = name + " ";
+                Console.Write(name);
+            });
+            Console.WriteLine();
+            mail.Copy.ForEach(delegate(String name) {
+                name = name + " ";
+                Console.Write(name);
+            });
+            Console.WriteLine();
+            Console.WriteLine(mail.Title);
+            Console.WriteLine(mail.Text);
         }
         
     }

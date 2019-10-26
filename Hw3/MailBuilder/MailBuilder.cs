@@ -5,9 +5,7 @@ namespace Hw3.MailBuilder
     public interface IMailBuilder
     {
         IMailBuilder SetReceiver(List<string> receiver);
-        //IMailBuilder SetReceiver(string receiver);
         IMailBuilder SetCopy(List<string> copy);
-        //IMailBuilder SetCopy(string copy);
         IMailBuilder SetTitle(string title);
         IMailBuilder SetBody(string text);
         Mail Result { get; }
@@ -16,9 +14,7 @@ namespace Hw3.MailBuilder
     public class MailBuilder : IMailBuilder
     {
         private List<string> _receiver;
-        //private string _receiver;
         private List<string> _copy;
-        //private string _copy;
         private string _title;
         private string _text;
         
@@ -51,17 +47,19 @@ namespace Hw3.MailBuilder
 
     public class MailBuilderDirector
     {
-        private readonly IClassicBuilder _classicBuilder;
+        private readonly IMailBuilder _mailBuilder;
 
-        public ClassicBuilderDirector(IClassicBuilder classicBuilder)
+        public MailBuilderDirector(IMailBuilder mailBuilder)
         {
-            _classicBuilder = classicBuilder;
+            _mailBuilder = mailBuilder;
         }
 
-        public void Build(string name, string text)
+        public void Build(List<string> receiver, List<string> copy, string title, string text)
         {
-            _classicBuilder.SetFileName(name);
-            _classicBuilder.SetBody(text);
+            _mailBuilder.SetReceiver(receiver);
+            _mailBuilder.SetCopy(copy);
+            _mailBuilder.SetTitle(title);
+            _mailBuilder.SetBody(text);
         }
     }
     

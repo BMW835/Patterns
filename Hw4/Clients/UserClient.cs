@@ -22,17 +22,17 @@ namespace Hw4.Clients
             {
                 var user = _firstOrm1.Read(userId);
                 var userInfo = _firstOrm2.Read(user.InfoId);
-                return (user, userInfo);
+                //return (user, userInfo);
             }
             else
             {
                 var user = _secondOrm.Context.Users.First(i => i.Id == userId);
                 var userInfo = _secondOrm.Context.UserInfos.First(i => i.Id == user.InfoId);
-                return (user, userInfo);
+                //return (user, userInfo);
             }
 
             // you should return DbUserEntity via _ormAdapter
-            return (null, null);
+            return(_ormAdapter.Get(userId).Item1, _ormAdapter.Get(userId).Item2);
         }
 
         public void Add(DbUserEntity user, DbUserInfoEntity userInfo)
@@ -45,6 +45,8 @@ namespace Hw4.Clients
             else
             {
                 // add realization by yourself
+                _secondOrm.Context.Users.Add(user);
+                _secondOrm.Context.UserInfos.Add(userInfo);
             }
 
             // you should create DbUserEntity and DbUserInfoEntity via _ormAdapter
@@ -73,4 +75,4 @@ namespace Hw4.Clients
             _ormAdapter = ormAdapter;
         }
     }
-}}
+}

@@ -50,6 +50,7 @@ namespace Hw4.Clients
             }
 
             // you should create DbUserEntity and DbUserInfoEntity via _ormAdapter
+            _ormAdapter.Add(user,userInfo);
         }
 
         public void Remove(int userId)
@@ -65,9 +66,17 @@ namespace Hw4.Clients
             else
             {
                 // add realization by yourself
+                var user = _secondOrm.Context.Users.First(i => i.Id == userId);
+                var userInfo = _secondOrm.Context.UserInfos.First(i => i.Id == user.InfoId);
+                
+                _secondOrm.Context.Users.Remove(user);
+                _secondOrm.Context.UserInfos.Remove(userInfo);
+
             }
 
             // you should remove DbUserEntity and DbUserInfoEntity via _ormAdapter
+            _ormAdapter.Remove(userId);
+
         }
 
         public UserClient(IOrmAdapter ormAdapter)

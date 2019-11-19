@@ -4,16 +4,14 @@ namespace Hw5
 {
     public class Chat : IChat
     {
-        public List<string> Send(string sender, string recipient, string mail)
+        public List<string> Send(string sender, string recipient, string text)
         {
-            var list = new List(sender, recipient, mail);
-        
-            return List<string>(sender, recipient, mail);
+            return new List<string> {sender, recipient, text};
         }
         
-        public List<string> Receive(string sender, string recipient, string mail)
+        public List<string> Receive(string sender, string recipient, string text)
         {
-            return _func(input);
+            return new List<string> {sender, recipient, text};
         }
     }
 }

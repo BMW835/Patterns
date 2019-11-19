@@ -39,6 +39,8 @@
     </ItemGroup>
     <ItemGroup>
         <Compile Include="Chat.cs" />
+        <Compile Include="Decorator.cs" />
+        <Compile Include="DecoratorBuilder.cs" />
         <Compile Include="IChat.cs" />
         <Compile Include="Program.cs" />
         <Compile Include="Properties\AssemblyInfo.cs" />

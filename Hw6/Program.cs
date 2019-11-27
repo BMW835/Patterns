@@ -1,4 +1,5 @@
-﻿using Example_06.ChainOfResponsibility;
+﻿using System;
+using Example_06.ChainOfResponsibility;
 
 namespace Hw6
 {
@@ -6,8 +7,9 @@ namespace Hw6
     {
         public static void Main(string[] args)
         {
-            //var f = new Bancomat.Validate("1");
-            var r = new Bancomat("22 Рублей");
+            var Euro = new Bancomat("537 Euro");
+            var Dollars = new Bancomat("285 Dollar");
+            var Rubles = new Bancomat("2312 Ruble");
         }
     }
 }

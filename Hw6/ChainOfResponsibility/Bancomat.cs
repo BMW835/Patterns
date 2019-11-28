@@ -72,7 +72,7 @@ namespace Example_06.ChainOfResponsibility
                     Console.WriteLine($"{Value} Dollar");
                     banknote = Int32.Parse(banknote.Split(' ')[0]) - Value + " Dollar";
                 }
-                if (Value == 10 && Int32.Parse(banknote.Split(' ')[0]) < Value)
+                if (Value == 10 && Int32.Parse(banknote.Split(' ')[0]) != 0)
                     Console.WriteLine("No " + banknote + " banknote");
             }
             
@@ -125,7 +125,7 @@ namespace Example_06.ChainOfResponsibility
                     Console.WriteLine($"{Value} Ruble");
                     banknote = Int32.Parse(banknote.Split(' ')[0]) - Value + " Ruble";
                 }
-                if (Value == 10 && Int32.Parse(banknote.Split(' ')[0]) < Value)
+                if (Value == 10 && Int32.Parse(banknote.Split(' ')[0]) != 0)
                     Console.WriteLine("No " + banknote + " banknote");
             }
             
@@ -178,7 +178,7 @@ namespace Example_06.ChainOfResponsibility
                     Console.WriteLine($"{Value} Euro");
                     banknote = Int32.Parse(banknote.Split(' ')[0]) - Value + " Euro";
                 }
-                if (Value == 5 && Int32.Parse(banknote.Split(' ')[0]) < Value)
+                if (Value == 5 && Int32.Parse(banknote.Split(' ')[0]) != 0)
                     Console.WriteLine("No " + banknote + " banknote");
             }
             

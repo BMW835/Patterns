@@ -34,10 +34,9 @@ namespace Hw7.State
             State.ChooseDoc(this);
         }
         
-        public Boolean PrintDoc()
+        public void PrintDoc()
         {
             State.PrintDoc(this);
-            return false;
         }
         
         public void GiveChange()
@@ -51,7 +50,7 @@ namespace Hw7.State
         void GetMoney(Tracer context);
         void ChooseDevice(Tracer context);
         void ChooseDoc(Tracer context);
-        Boolean PrintDoc(Tracer context);
+        void PrintDoc(Tracer context);
         void GiveChange(Tracer context);
     }
     
@@ -60,7 +59,7 @@ namespace Hw7.State
         public abstract void GetMoney(Tracer context);
         public abstract void ChooseDevice(Tracer context);
         public abstract void ChooseDoc(Tracer context);
-        public abstract Boolean PrintDoc(Tracer context);
+        public abstract void PrintDoc(Tracer context);
         public abstract void GiveChange(Tracer context);
     }
     
@@ -75,7 +74,7 @@ namespace Hw7.State
         }
         public override void ChooseDevice(Tracer context) {}
         public override void ChooseDoc(Tracer context) {}
-        public override Boolean PrintDoc(Tracer context) {return false;}
+        public override void PrintDoc(Tracer context) {}
         public override void GiveChange(Tracer context) {}
     }
     
@@ -85,13 +84,20 @@ namespace Hw7.State
         public override void ChooseDevice(Tracer context)
         {
             if (context.Device == "USB")
+            {
                 Console.WriteLine("USB connection established");
-            if (context.Device == "Wi-Fi")
+                context.State = new ChooseDocState();
+            }
+            else if (context.Device == "Wi-Fi")
+            {
                 Console.WriteLine("Wi-Fi connection established");
-            context.State = new ChooseDocState();
+                context.State = new ChooseDocState();
+            }
+            else context.State = new GiveChangeState();
+            
         }
         public override void ChooseDoc(Tracer context) {}
-        public override Boolean PrintDoc(Tracer context) {return false;}
+        public override void PrintDoc(Tracer context) {}
         public override void GiveChange(Tracer context) {}
     }
     
@@ -105,12 +111,7 @@ namespace Hw7.State
             context.State = new PrintDocState();
         }
 
-        public override Boolean PrintDoc(Tracer context)
-        {
-            Console.WriteLine($"Document {context.Docs[context.DocNumber]} is chosen");
-            context.State = new PrintDocState();
-            return false;
-        }
+        public override void PrintDoc(Tracer context) {}
         public override void GiveChange(Tracer context) {}
     }
     
@@ -119,24 +120,16 @@ namespace Hw7.State
         public override void GetMoney(Tracer context)  {}
         public override void ChooseDevice(Tracer context) {}
         public override void ChooseDoc(Tracer context) {}
-        public override Boolean PrintDoc(Tracer context)
+        public override void PrintDoc(Tracer context)
         {
             Console.WriteLine($"Printing {context.Docs[context.DocNumber]} ...");
             context.Money = context.Money - 5;
-            var end = false;
-            //if (context.Docs.Length > context.DocNumber)
-            if (context.DocNumber < context.Docs.Length)
+            if (context.Docs.Length - 1 > context.DocNumber)
             {
                 context.DocNumber++;
                 context.State = new ChooseDocState();
             }
-            else
-            {
-                end = true;
-                context.State = new GiveChangeState();
-            }
-
-            return end;
+            else context.State = new GiveChangeState();
         }
         public override void GiveChange(Tracer context) {}
     }
@@ -146,7 +139,7 @@ namespace Hw7.State
         public override void GetMoney(Tracer context)  {}
         public override void ChooseDevice(Tracer context) {}
         public override void ChooseDoc(Tracer context) {}
-        public override Boolean PrintDoc(Tracer context) {return false;}
+        public override void PrintDoc(Tracer context) {}
         public override void GiveChange(Tracer context)
         {
             Console.WriteLine($"Take {context.Money} rubles change");

@@ -7,13 +7,13 @@ namespace Hw7
     {
         public static void Main(string[] args)
         {
-            var folder = new[] {"*FIRST LIST*", "*SECOND LIST*", "*THIRD LIST*"};
-            var tracer = new Tracer(100, "USB",  folder);
+            var tracer = new Tracer(100, "USB",  new[] {"*FIRST LIST*", "*SECOND LIST*", "*THIRD LIST*"});
             tracer.GetMoney();
             tracer.ChooseDevice();
             tracer.ChooseDoc();
-            for (int i = 0; i <= folder.Length*2; i++)
+            for (int i = 0; i <= tracer.Docs.Length; i++)
             {
+                tracer.ChooseDoc();
                 tracer.PrintDoc();
             }
             tracer.GiveChange();

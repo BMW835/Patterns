@@ -10,6 +10,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hw5", "Hw5\Hw5.csproj", "{E
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hw6", "Hw6\Hw6.csproj", "{09FEFDE6-D613-4640-98FC-7149045DCE8F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hw7", "Hw7\Hw7.csproj", "{110EC224-296D-4990-BDB7-4FBDA1368CDC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -36,5 +38,9 @@ Global
 		{09FEFDE6-D613-4640-98FC-7149045DCE8F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{09FEFDE6-D613-4640-98FC-7149045DCE8F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{09FEFDE6-D613-4640-98FC-7149045DCE8F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{110EC224-296D-4990-BDB7-4FBDA1368CDC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{110EC224-296D-4990-BDB7-4FBDA1368CDC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{110EC224-296D-4990-BDB7-4FBDA1368CDC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{110EC224-296D-4990-BDB7-4FBDA1368CDC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

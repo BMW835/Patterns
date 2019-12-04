@@ -110,7 +110,6 @@ namespace Hw7.State
             Console.WriteLine($"Document {context.Docs[context.DocNumber]} is chosen");
             context.State = new PrintDocState();
         }
-
         public override void PrintDoc(Tracer context) {}
         public override void GiveChange(Tracer context) {}
     }

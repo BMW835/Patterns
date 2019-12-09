@@ -4,9 +4,10 @@ namespace Hw7.State
 {
     public class Tracer
     {
-        public int Money { get; }
+        public int Money { get; set;}
         public string Device { get; }
         public string[] Docs { get; }
+        public int DocNumber { get; set; }
         public ITracer State { get; set; }
 
         public Tracer(int money, string device, string[] docs)
@@ -14,6 +15,7 @@ namespace Hw7.State
             Money = money;
             Device = device;
             Docs = docs;
+            DocNumber = 0;
             State = new GetMoneyState();
         }
 
@@ -25,6 +27,21 @@ namespace Hw7.State
         public void ChooseDevice()
         {
             State.ChooseDevice(this);
+        }
+        
+        public void ChooseDoc()
+        {
+            State.ChooseDoc(this);
+        }
+        
+        public void PrintDoc()
+        {
+            State.PrintDoc(this);
+        }
+        
+        public void GiveChange()
+        {
+            State.GiveChange(this);
         }
         
     }
@@ -67,12 +84,64 @@ namespace Hw7.State
         public override void ChooseDevice(Tracer context)
         {
             if (context.Device == "USB")
+            {
                 Console.WriteLine("USB connection established");
-            if (context.Device == "Wi-Fi")
+                context.State = new ChooseDocState();
+            }
+            else if (context.Device == "Wi-Fi")
+            {
                 Console.WriteLine("Wi-Fi connection established");
+                context.State = new ChooseDocState();
+            }
+            else context.State = new GiveChangeState();
+            
         }
         public override void ChooseDoc(Tracer context) {}
         public override void PrintDoc(Tracer context) {}
         public override void GiveChange(Tracer context) {}
+    }
+    
+    public class ChooseDocState : TracerBase
+    {
+        public override void GetMoney(Tracer context)  {}
+        public override void ChooseDevice(Tracer context) {}
+        public override void ChooseDoc(Tracer context)
+        {
+            Console.WriteLine($"Document {context.Docs[context.DocNumber]} is chosen");
+            context.State = new PrintDocState();
+        }
+        public override void PrintDoc(Tracer context) {}
+        public override void GiveChange(Tracer context) {}
+    }
+    
+    public class PrintDocState : TracerBase
+    {
+        public override void GetMoney(Tracer context)  {}
+        public override void ChooseDevice(Tracer context) {}
+        public override void ChooseDoc(Tracer context) {}
+        public override void PrintDoc(Tracer context)
+        {
+            Console.WriteLine($"Printing {context.Docs[context.DocNumber]} ...");
+            context.Money = context.Money - 5;
+            if (context.Docs.Length - 1 > context.DocNumber)
+            {
+                context.DocNumber++;
+                context.State = new ChooseDocState();
+            }
+            else context.State = new GiveChangeState();
+        }
+        public override void GiveChange(Tracer context) {}
+    }
+    
+    public class GiveChangeState : TracerBase
+    {
+        public override void GetMoney(Tracer context)  {}
+        public override void ChooseDevice(Tracer context) {}
+        public override void ChooseDoc(Tracer context) {}
+        public override void PrintDoc(Tracer context) {}
+        public override void GiveChange(Tracer context)
+        {
+            Console.WriteLine($"Take {context.Money} rubles change");
+        }
     }
 }
